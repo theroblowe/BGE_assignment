@@ -257,3 +257,8 @@ bool BGE::ClosestRayIntersectsSphere(const RayGeom & ray, const SphereGeom & sph
     }
     return false;
 }
+
+glm::vec3 BGE::LeapToGLVector(const Leap::Vector & v)
+{
+	return glm::vec3(v.x, v.y, v.z);
+}

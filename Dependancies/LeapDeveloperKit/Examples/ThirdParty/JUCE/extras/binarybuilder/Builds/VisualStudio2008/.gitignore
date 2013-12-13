@@ -1,0 +1,4 @@
+*.old
+Debug/
+Release/
+_UpgradeReport_Files/

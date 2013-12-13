@@ -10,6 +10,8 @@
 #include <functional> 
 #include <cctype>
 #include <string>
+#include <Leap.h>
+#include <LeapMath.h>
 
 using namespace FMOD;
 using namespace OVR;
@@ -43,6 +45,7 @@ namespace BGE
 	glm::quat BtToGLQuat(const btQuaternion & q);
 	btVector3 GLToBtVector(const glm::vec3 & v);
 	btQuaternion GLToBtQuat(const glm::quat & q);
+	glm::vec3 LeapToGLVector(const Leap::Vector & v);
 
 	string ltrim(string s);
 	string rtrim(string s);
