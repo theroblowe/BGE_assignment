@@ -70,6 +70,13 @@ bool assignment::Initialise()
 
 void assignment::Update(float timeDelta)
 {
+
+	Leap::Vector start[5] = {};
+	Leap::Vector end[5] = {};
+
+	glm::vec3 Glstart[5] = {};
+	glm::vec3 Glend[5] = {};
+
 	fountain->position = spaceShip->position;
 	glm::vec3 acceleration;
 	float newtons = 10.0f;
@@ -96,6 +103,41 @@ void assignment::Update(float timeDelta)
 			//spaceshipController->Roll(-(hand.palmNormal().roll()*RAD_TO_DEG)/50.0);
 			//spaceshipController->Yaw(-(hand.direction().yaw()*RAD_TO_DEG)/50.0);
 
+			for (int i = 0; i < fingers.count(); ++i) 
+			{
+        	  
+			  //start[i].x = fingers[i].tipPosition().x - fingers[i].length();
+			  //start[i].y = fingers[i].tipPosition().y - fingers[i].length();
+			  //start[i].z = fingers[i].tipPosition().z - fingers[i].length();
+
+			  start[i].x = hand.palmPosition().x;
+			  start[i].z = hand.palmPosition().z;
+			  start[i].y = hand.palmPosition().y;
+
+			  end[i] = fingers[i].tipPosition();
+			  //std::cout << i << start[i] << end[i] <<endl;
+
+			  Glstart[i] = BGE::LeapToGLVector(start[i]);
+			  Glend[i] = BGE::LeapToGLVector(end[i]);
+
+			  Glstart[i].x = Glstart[i].x/10;
+			  Glstart[i].z = Glstart[i].z/10;
+			  Glstart[i].y = Glstart[i].y/10;
+
+			  Glend[i].x = Glend[i].x/10;
+			  Glend[i].z = Glend[i].z/10;
+			  Glend[i].y = Glend[i].y/10;
+		  
+		  }
+
+			  for (int i = 0; i < fingers.count(); ++i) 
+		  {
+			  glm::vec3 colour = glm::vec3(255,255,0);
+		  
+			  LineDrawer::DrawLine(Glstart[i],Glend[i],colour);
+		  
+		  }
+
 			//camera->GetController()->position = spaceShip->position;
 			spaceShip->velocity *= 0.99f;
 		}
@@ -104,6 +146,9 @@ void assignment::Update(float timeDelta)
 	//camera->GetController()->position.x = spaceShip->GetController()->position.x;
 	//camera->GetController()->look = spaceShip->GetController()->look;
 	//camera->GetController()->orientation = spaceShip->GetController()->orientation;
+
+
+
 
 	Game::Update(timeDelta);
 }

@@ -96,16 +96,15 @@ void LeapController::Update(float timeDelta)
 		}
 
 		// Yaw
-		if (keyState[SDL_SCANCODE_J])
-		//if(hand.palmPosition().roll() > -2.75 && hand.palmPosition().roll() < 0)
+		//if (keyState[SDL_SCANCODE_J])
+		if(hand.direction().yaw()*RAD_TO_DEG < -40.0)
 		{
-
-			//AddTorque((up * scale * timeDelta)/glm::vec3(10,10,10));
+			AddTorque((up * scale * timeDelta)/glm::vec3(100,100,100));
 		}
-		if (keyState[SDL_SCANCODE_L])
-		//if(hand.palmPosition().roll() < 2.75 && hand.palmPosition().roll() > 0)
+		//if (keyState[SDL_SCANCODE_L])
+		if(hand.direction().yaw()*RAD_TO_DEG > 40.0)
 		{
-			//AddTorque((- up * scale * timeDelta)/glm::vec3(10,10,10));
+			AddTorque((- up * scale * timeDelta)/glm::vec3(100,100,100));
 		}
 		// End of Yaw
 
